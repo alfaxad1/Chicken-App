@@ -1,5 +1,5 @@
 import React from "react";
-import Expenses from "./components/Expenses";
+import Expenses from "./pages/Expenses";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const App = () => {

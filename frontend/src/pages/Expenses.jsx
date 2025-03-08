@@ -30,11 +30,13 @@ const Expenses = () => {
     }
   };
 
+  let msg;
   const Delete = async (id) => {
     try {
       const response = await axios.delete(
         `http://localhost:3000/api/expenses/${id}`
       );
+      msg = response.data.message;
       console.log(response.data.message);
       fetchExpenses();
     } catch (error) {
@@ -60,6 +62,7 @@ const Expenses = () => {
     <>
       <button>Create</button>
       <div>
+        <p>{msg}</p>
         <form id="expenses-form">
           <div id="expenses-fields">
             <div>
