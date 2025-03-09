@@ -1,23 +1,43 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { fetchPurchases } from "./PurchaseForm";
+import React, { useEffect, useState } from "react";
 
-const PurchaseForm = () => {
-  const navigate = useNavigate();
-  const [purchase, setPurchase] = useState({
-    product: "",
-    bags: 0,
-    qty: 0,
-    cost_per_bag: 0,
-    discount: 0,
-    total: 0,
-    date: "",
-  });
+const PurchaseForm = ({ fetchPurchases }) => {
+  const [product, setProduct] = useState("");
+  const [bags, setBags] = useState(0);
+  const [qty, setQty] = useState(50);
+  const [cost_per_bag, setCostPerBag] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [date, setDate] = useState("");
 
-  const handleChange = (e) => {
-    setPurchase({ ...purchase, [e.target.name]: e.target.value });
+  const purchase = {
+    product,
+    bags,
+    qty,
+    cost_per_bag,
+    discount,
+    total,
+    date,
   };
+
+  const resetForm = () => {
+    setProduct("");
+    setBags(0);
+    setQty(50);
+    setCostPerBag(0);
+    setDiscount(0);
+    setTotal(0);
+    setDate("");
+  };
+
+  useEffect(() => {
+    setTotal(calculateTotal(bags, cost_per_bag, discount));
+  }, [bags, cost_per_bag, discount]);
+
+  const calculateTotal = (bags, cost, discount) => {
+    return parseFloat(bags) * parseFloat(cost) - parseFloat(discount);
+  };
+
   const Save = async (e) => {
     e.preventDefault();
     try {
@@ -27,8 +47,8 @@ const PurchaseForm = () => {
         purchase
       );
       console.log(response.data.message);
+      resetForm();
       fetchPurchases();
-      navigate(`/purchases`);
     } catch (error) {
       console.log(error);
     }
@@ -42,8 +62,9 @@ const PurchaseForm = () => {
             <select
               name="product"
               onChange={(e) => {
-                handleChange(e);
+                setProduct(e.target.value);
               }}
+              value={product}
               required
             >
               <option>Choose...</option>
@@ -59,9 +80,10 @@ const PurchaseForm = () => {
               type="number"
               name="bags"
               onChange={(e) => {
-                handleChange(e);
+                setBags(e.target.value);
               }}
               placeholder="Enter number of bags"
+              value={bags}
               required
             />
           </div>
@@ -71,10 +93,10 @@ const PurchaseForm = () => {
               type="number"
               name="qty"
               onChange={(e) => {
-                handleChange(e);
+                setQty(e.target.value);
               }}
+              value={qty}
               placeholder="Enter quantity"
-              required
             />
           </div>
           <div>
@@ -83,9 +105,10 @@ const PurchaseForm = () => {
               type="number"
               name="cost_per_bag"
               onChange={(e) => {
-                handleChange(e);
+                setCostPerBag(e.target.value);
               }}
               placeholder="Enter cost"
+              value={cost_per_bag}
               required
             />
           </div>
@@ -95,8 +118,9 @@ const PurchaseForm = () => {
               type="number"
               name="discount"
               onChange={(e) => {
-                handleChange(e);
+                setDiscount(e.target.value);
               }}
+              value={discount}
               placeholder="Enter discount given"
               required
             />
@@ -106,10 +130,9 @@ const PurchaseForm = () => {
             <input
               type="number"
               name="total"
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              placeholder=""
+              readOnly
+              value={total}
+              placeholder="Total"
               required
             />
           </div>
@@ -119,8 +142,9 @@ const PurchaseForm = () => {
               type="date"
               name="date"
               onChange={(e) => {
-                handleChange(e);
+                setDate(e.target.value);
               }}
+              value={date}
               required
             />
           </div>

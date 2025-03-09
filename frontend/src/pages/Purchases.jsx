@@ -11,7 +11,7 @@ const Purchases = () => {
     fetchPurchases();
   }, []);
 
-  async function fetchPurchases() {
+  const fetchPurchases = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/api/purchases`);
       setPurchasesData(response.data);
@@ -19,7 +19,7 @@ const Purchases = () => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const Delete = async (id) => {
     try {
@@ -35,7 +35,7 @@ const Purchases = () => {
 
   return (
     <>
-      <PurchaseForm />
+      <PurchaseForm fetchPurchases={fetchPurchases} />
       <table>
         <thead>
           <tr>
