@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PurchaseForm from "../forms/PurchaseForm";
+import axios from "axios";
 
 const Purchases = () => {
   let num = 1;
@@ -20,7 +20,6 @@ const Purchases = () => {
       console.error(error);
     }
   };
-
   const Delete = async (id) => {
     try {
       const response = await axios.delete(
@@ -32,7 +31,6 @@ const Purchases = () => {
       console.log(error);
     }
   };
-
   return (
     <>
       <PurchaseForm fetchPurchases={fetchPurchases} />
