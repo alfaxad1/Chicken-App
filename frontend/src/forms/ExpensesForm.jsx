@@ -9,7 +9,7 @@ const ExpensesForm = ({ fetchExpenses }) => {
   });
 
   const handleChange = (e) => {
-    setExpense({ ...expense, [e.target.name]: [e.target.value] });
+    setExpense({ ...expense, [e.target.name]: e.target.value });
   };
 
   const Save = async (e) => {
