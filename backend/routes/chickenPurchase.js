@@ -17,7 +17,7 @@ router.post("/", (req, res) => {
   const { supplierId, chickenType, age, price, pieces, discount, total, date } =
     req.body;
   const query =
-    "INSERT INTO chicken_purchases (supplier_id, chicken_type, age, price_per_piece, no_of_pieces, discount, total_price, purchase_date) VALUES (?, ?, ?, ?, ?, ?)";
+    "INSERT INTO chicken_purchases (supplier_id, chicken_type, age, price_per_piece, no_of_pieces, discount, total_price, purchase_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
   connection.query(
     query,
     [supplierId, chickenType, age, price, pieces, discount, total, date],
@@ -36,7 +36,7 @@ router.put("/:id", (req, res) => {
   const { supplierId, chickenType, age, price, pieces, discount, total, date } =
     req.body;
   const query =
-    "UPDATE chicken_purchases SET supplier_id = ?, chicken_type = ?, price_per_piece = ?, no_of_pieces = ?, total_price = ?, purchase_date = ? WHERE id = ?";
+    "UPDATE chicken_purchases SET supplier_id = ?, chicken_type = ?, age = ?, price_per_piece = ?, no_of_pieces = ?, discount = ?, total_price = ?, purchase_date = ? WHERE id = ?";
   connection.query(
     query,
     [
