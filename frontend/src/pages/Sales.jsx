@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import SalesForm from "../forms/SalesForm";
 
 const Sales = () => {
   let num = 1;
@@ -21,7 +22,9 @@ const Sales = () => {
 
   const Delete = async (id) => {
     try {
-      const response = axios.delete(`http://localhost:3000/api/sales/${id}`);
+      const response = await axios.delete(
+        `http://localhost:3000/api/sales/${id}`
+      );
       console.log(response.data.message);
       fetchSales();
     } catch (error) {
@@ -31,6 +34,7 @@ const Sales = () => {
 
   return (
     <>
+      <SalesForm fetchSales={fetchSales} />
       <table>
         <thead>
           <tr>

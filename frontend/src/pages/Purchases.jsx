@@ -25,7 +25,7 @@ const Purchases = () => {
       const response = await axios.delete(
         `http://localhost:3000/api/purchases/${id}`
       );
-      console.log(response.data.message);
+      console.log(response);
       fetchPurchases();
     } catch (error) {
       console.log(error);
