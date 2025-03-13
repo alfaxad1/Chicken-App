@@ -1,24 +1,59 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const SalesForm = ({ fetchSales }) => {
   const [saleType, setSaleType] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  const [sale, setSale] = useState({
+    customer_id: "",
+    //saleType: "",
+    chicken_type: "",
+    price_per_piece: 0,
+    number_of_pieces: 0,
+    quantity_sold: 0,
+    price_per_unit: 0,
+    //total_price: 0,
+    date: "",
+  });
+
+  const calculate = (val1, val2) => {
+    return parseFloat(val1) * parseFloat(val2);
+  };
+
+  useEffect(() => {
+    saleType === "chicken"
+      ? setTotal(calculate(sale.price_per_piece, sale.number_of_pieces))
+      : setTotal(calculate(sale.quantity_sold, sale.price_per_unit));
+  }, [
+    sale.price_per_piece,
+    sale.number_of_pieces,
+    sale.quantity_sold,
+    sale.price_per_unit,
+    saleType,
+  ]);
 
   const handleSaleTypeChange = (e) => {
     setSaleType(e.target.value);
   };
 
-  const [sale, setSale] = useState({});
+  sale.sale_type = saleType;
+  sale.total_price = total;
 
   const handleChange = (e) => {
     setSale({ ...sale, [e.target.name]: e.target.value });
   };
 
-  const Save = async () => {
+  const Save = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post(``, sale);
+      const response = await axios.post(
+        `http://localhost:3000/api/sales`,
+        sale
+      );
       console.log(sale);
       console.log(response.data.message);
+      //window.location.reload();
       fetchSales();
     } catch (error) {
       console.error(error);
@@ -42,6 +77,8 @@ const SalesForm = ({ fetchSales }) => {
                 <input
                   type="text"
                   id="customer-id-chicken"
+                  name="customer_id"
+                  value={sale.customer_id}
                   onChange={(e) => handleChange(e)}
                   placeholder="Enter Customer ID"
                 />
@@ -51,7 +88,8 @@ const SalesForm = ({ fetchSales }) => {
                 <select
                   id="type-of-chicken"
                   onChange={(e) => handleChange(e)}
-                  s
+                  value={sale.chicken_type}
+                  name="chicken_type"
                 >
                   <option>Choose...</option>
                   <option value="chick">Chick</option>
@@ -64,6 +102,8 @@ const SalesForm = ({ fetchSales }) => {
                 <input
                   type="number"
                   id="price-per-piece"
+                  name="price_per_piece"
+                  value={sale.price_per_piece}
                   onChange={(e) => handleChange(e)}
                   placeholder="Enter price per piece"
                 />
@@ -73,6 +113,8 @@ const SalesForm = ({ fetchSales }) => {
                 <input
                   type="number"
                   id="number-of-pieces"
+                  name="number_of_pieces"
+                  value={sale.number_of_pieces}
                   onChange={(e) => handleChange(e)}
                   placeholder="Enter number of pieces"
                 />
@@ -82,14 +124,22 @@ const SalesForm = ({ fetchSales }) => {
                 <input
                   type="number"
                   id="total-price-chicken"
+                  name="total_price"
+                  value={total}
                   onChange={(e) => handleChange(e)}
                   placeholder="Total"
-                  readOnly
+                  //readOnly
                 />
               </div>
               <div>
                 <label htmlFor="chicken-sale-date">Date:</label>
-                <input type="date" id="chicken-sale-date" />
+                <input
+                  type="date"
+                  id="chicken-sale-date"
+                  name="date"
+                  onChange={(e) => handleChange(e)}
+                  value={sale.date}
+                />
               </div>
             </div>
           ) : saleType === "eggs" ? (
@@ -99,6 +149,8 @@ const SalesForm = ({ fetchSales }) => {
                 <input
                   type="text"
                   id="customer-id-eggs"
+                  name="customer_id"
+                  value={sale.customer_id}
                   onChange={(e) => handleChange(e)}
                   placeholder="Enter Customer ID"
                 />
@@ -111,6 +163,8 @@ const SalesForm = ({ fetchSales }) => {
                   type="number"
                   id="quantity-trays"
                   onChange={(e) => handleChange(e)}
+                  value={sale.quantity_sold}
+                  name="quantity_sold"
                   placeholder="Enter quantity"
                 />
               </div>
@@ -119,6 +173,8 @@ const SalesForm = ({ fetchSales }) => {
                 <input
                   type="number"
                   id="price-per-tray"
+                  name="price_per_unit"
+                  value={sale.price_per_unit}
                   onChange={(e) => handleChange(e)}
                   placeholder="Enter price per unit"
                 />
@@ -128,9 +184,11 @@ const SalesForm = ({ fetchSales }) => {
                 <input
                   type="number"
                   id="total-price-eggs"
+                  name="total_price"
+                  value={total}
                   onChange={(e) => handleChange(e)}
                   placeholder="Total"
-                  readOnly
+                  //readOnly
                 />
               </div>
               <div>
@@ -138,6 +196,8 @@ const SalesForm = ({ fetchSales }) => {
                 <input
                   type="date"
                   id="eggs-sale-date"
+                  name="date"
+                  value={sale.date}
                   onChange={(e) => handleChange(e)}
                 />
               </div>
