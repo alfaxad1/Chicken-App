@@ -9,7 +9,7 @@ const EggsCollectionForm = ({ fetchEggsCollection }) => {
   });
 
   const handleChange = (e) => {
-    setCollection({ ...collection, [e.target.value]: e.target.value });
+    setCollection({ ...collection, [e.target.name]: e.target.value });
   };
 
   const Save = async (e) => {
@@ -21,8 +21,8 @@ const EggsCollectionForm = ({ fetchEggsCollection }) => {
       );
       //console.log(collection);
       console.log(response.data.message);
+      resetForm();
       fetchEggsCollection();
-      resetForm;
     } catch (error) {
       console.error(error);
     }
