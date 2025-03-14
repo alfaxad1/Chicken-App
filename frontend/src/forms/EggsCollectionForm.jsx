@@ -21,6 +21,7 @@ const EggsCollectionForm = ({ fetchEggsCollection }) => {
       );
       //console.log(collection);
       console.log(response.data.message);
+      window.location.reload();
       resetForm();
       fetchEggsCollection();
     } catch (error) {

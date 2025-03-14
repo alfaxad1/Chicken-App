@@ -2,40 +2,41 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const PurchaseForm = ({ fetchPurchases }) => {
-  const [product, setProduct] = useState("");
-  const [bags, setBags] = useState(0);
-  const [qty, setQty] = useState(50);
-  const [cost_per_bag, setCostPerBag] = useState(0);
-  const [discount, setDiscount] = useState(0);
+  const [purchase, setPurchase] = useState({
+    product: "",
+    bags: 0,
+    qty: 50,
+    cost_per_bag: 0,
+    discount: 0,
+    date: "",
+  });
   const [total, setTotal] = useState(0);
-  const [date, setDate] = useState("");
 
-  const purchase = {
-    product,
-    bags,
-    qty,
-    cost_per_bag,
-    discount,
-    total,
-    date,
-  };
-
-  const resetForm = () => {
-    setProduct("");
-    setBags(0);
-    setQty(50);
-    setCostPerBag(0);
-    setDiscount(0);
-    setTotal(0);
-    setDate("");
+  const handleChange = (e) => {
+    setPurchase({ ...purchase, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
-    setTotal(calculateTotal(bags, cost_per_bag, discount));
-  }, [bags, cost_per_bag, discount]);
+    setTotal(
+      calculateTotal(purchase.bags, purchase.cost_per_bag, purchase.discount)
+    );
+  }, [purchase.bags, purchase.cost_per_bag, purchase.discount]);
 
   const calculateTotal = (bags, cost, discount) => {
     return parseFloat(bags) * parseFloat(cost) - parseFloat(discount);
+  };
+  purchase.total = total;
+
+  const resetForm = () => {
+    setPurchase({
+      product: "",
+      bags: 0,
+      qty: 50,
+      cost_per_bag: 0,
+      discount: 0,
+      total: 0,
+      date: "",
+    });
   };
 
   const Save = async (e) => {
@@ -48,6 +49,7 @@ const PurchaseForm = ({ fetchPurchases }) => {
       );
       console.log(response.data.message);
       resetForm();
+      window.location.reload();
       fetchPurchases();
     } catch (error) {
       console.log(error);
@@ -61,10 +63,8 @@ const PurchaseForm = ({ fetchPurchases }) => {
             <label htmlFor="product">Product:</label>
             <select
               name="product"
-              onChange={(e) => {
-                setProduct(e.target.value);
-              }}
-              value={product}
+              onChange={(e) => handleChange(e)}
+              value={purchase.product}
               required
             >
               <option>Choose...</option>
@@ -79,11 +79,9 @@ const PurchaseForm = ({ fetchPurchases }) => {
             <input
               type="number"
               name="bags"
-              onChange={(e) => {
-                setBags(e.target.value);
-              }}
+              onChange={(e) => handleChange(e)}
               placeholder="Enter number of bags"
-              value={bags}
+              value={purchase.bags}
               required
             />
           </div>
@@ -92,10 +90,8 @@ const PurchaseForm = ({ fetchPurchases }) => {
             <input
               type="number"
               name="qty"
-              onChange={(e) => {
-                setQty(e.target.value);
-              }}
-              value={qty}
+              onChange={(e) => handleChange(e)}
+              value={purchase.qty}
               placeholder="Enter quantity"
             />
           </div>
@@ -104,11 +100,9 @@ const PurchaseForm = ({ fetchPurchases }) => {
             <input
               type="number"
               name="cost_per_bag"
-              onChange={(e) => {
-                setCostPerBag(e.target.value);
-              }}
+              onChange={(e) => handleChange(e)}
               placeholder="Enter cost"
-              value={cost_per_bag}
+              value={purchase.cost_per_bag}
               required
             />
           </div>
@@ -117,10 +111,8 @@ const PurchaseForm = ({ fetchPurchases }) => {
             <input
               type="number"
               name="discount"
-              onChange={(e) => {
-                setDiscount(e.target.value);
-              }}
-              value={discount}
+              onChange={(e) => handleChange(e)}
+              value={purchase.discount}
               placeholder="Enter discount given"
               required
             />
@@ -141,10 +133,8 @@ const PurchaseForm = ({ fetchPurchases }) => {
             <input
               type="date"
               name="date"
-              onChange={(e) => {
-                setDate(e.target.value);
-              }}
-              value={date}
+              onChange={(e) => handleChange(e)}
+              value={purchase.date}
               required
             />
           </div>

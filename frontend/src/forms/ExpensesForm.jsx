@@ -22,6 +22,7 @@ const ExpensesForm = ({ fetchExpenses }) => {
       console.log(response.data.message);
       resetForm();
       fetchExpenses();
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }

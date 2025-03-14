@@ -23,6 +23,7 @@ const ChickenLossForm = ({ fetchChickenLoss }) => {
       console.log(chickenLoss);
       console.log(response.data.message);
       fetchChickenLoss();
+      window.location.reload();
       resetForm();
     } catch (error) {
       console.error(error);

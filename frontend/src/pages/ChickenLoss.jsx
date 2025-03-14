@@ -4,6 +4,11 @@ import ChickenLossForm from "../forms/ChickenLossForm";
 
 const ChickenLoss = () => {
   const [chickenLossData, setChickenLossData] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const create = () => {
+    setShow(!show);
+  };
 
   let num = 1;
   useEffect(() => {
@@ -35,7 +40,10 @@ const ChickenLoss = () => {
   };
   return (
     <>
-      <ChickenLossForm fetchChickenLoss={fetchChickenLoss} />
+      <button onClick={() => create()}>create</button>
+      <div style={{ display: show ? "block" : "none" }}>
+        <ChickenLossForm fetchChickenLoss={fetchChickenLoss} />
+      </div>
       <table>
         <thead>
           <tr>

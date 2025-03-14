@@ -5,6 +5,11 @@ import EggsCollectionForm from "../forms/EggsCollectionForm";
 const EggsCollection = () => {
   let num = 1;
   const [eggsCollectionData, setEggsCollectionData] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const create = () => {
+    setShow(!show);
+  };
 
   useEffect(() => {
     fetchEggsCollection();
@@ -35,7 +40,11 @@ const EggsCollection = () => {
   };
   return (
     <>
-      <EggsCollectionForm fetchEggsCollection={fetchEggsCollection} />
+      <button onClick={() => create()}>create</button>
+      <div style={{ display: show ? "block" : "none" }}>
+        <EggsCollectionForm fetchEggsCollection={fetchEggsCollection} />
+      </div>
+
       <table>
         <thead>
           <tr>

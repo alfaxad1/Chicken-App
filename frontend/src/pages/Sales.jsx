@@ -5,6 +5,11 @@ import SalesForm from "../forms/SalesForm";
 const Sales = () => {
   let num = 1;
   const [salesData, setSalesData] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const create = () => {
+    setShow(!show);
+  };
 
   useEffect(() => {
     fetchSales();
@@ -34,7 +39,11 @@ const Sales = () => {
 
   return (
     <>
-      <SalesForm fetchSales={fetchSales} />
+      <button onClick={() => create()}>create</button>
+      <div style={{ display: show ? "block" : "none" }}>
+        <SalesForm fetchSales={fetchSales} />
+      </div>
+
       <table>
         <thead>
           <tr>

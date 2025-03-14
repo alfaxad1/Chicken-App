@@ -5,6 +5,11 @@ import ChickenPurchasesForm from "../forms/ChickenPurchasesForm";
 const ChickenPurchases = () => {
   let num = 1;
   const [chickenPurchasesData, setChickenPurchasesData] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const create = () => {
+    setShow(!show);
+  };
 
   useEffect(() => {
     fetchChickenPurchases();
@@ -36,7 +41,10 @@ const ChickenPurchases = () => {
 
   return (
     <>
-      <ChickenPurchasesForm fetchChickenPurchases={fetchChickenPurchases} />
+      <button onClick={() => create()}>create</button>
+      <div style={{ display: show ? "block" : "none" }}>
+        <ChickenPurchasesForm fetchChickenPurchases={fetchChickenPurchases} />
+      </div>
 
       <table>
         <thead>

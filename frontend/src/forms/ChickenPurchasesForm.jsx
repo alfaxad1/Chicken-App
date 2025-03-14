@@ -43,6 +43,7 @@ const ChickenPurchasesForm = ({ fetchChickenPurchases }) => {
       );
       console.log(chickenPurchase);
       console.log(response.data.message);
+      window.location.reload();
       resetForm();
       fetchChickenPurchases();
     } catch (error) {

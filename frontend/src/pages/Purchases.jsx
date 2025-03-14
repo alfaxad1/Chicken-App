@@ -6,6 +6,11 @@ const Purchases = () => {
   let num = 1;
 
   const [purchasesData, setPurchasesData] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const create = () => {
+    setShow(!show);
+  };
 
   useEffect(() => {
     fetchPurchases();
@@ -33,7 +38,11 @@ const Purchases = () => {
   };
   return (
     <>
-      <PurchaseForm fetchPurchases={fetchPurchases} />
+      <button onClick={() => create()}>create</button>
+      <div style={{ display: show ? "block" : "none" }}>
+        <PurchaseForm fetchPurchases={fetchPurchases} />
+      </div>
+
       <table>
         <thead>
           <tr>

@@ -59,7 +59,7 @@ const SalesForm = ({ fetchSales }) => {
       );
       console.log(sale);
       console.log(response.data.message);
-      //window.location.reload();
+      window.location.reload();
       fetchSales();
       resetForm();
     } catch (error) {
