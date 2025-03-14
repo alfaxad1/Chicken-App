@@ -13,6 +13,7 @@ router.post("/", (request, response) => {
     number_of_pieces,
     quantity_sold,
     price_per_unit,
+    discount,
     total_price,
     date,
   } = request.body;
@@ -23,27 +24,29 @@ router.post("/", (request, response) => {
   if (sale_type === "chicken") {
     query = `INSERT INTO sales 
                 (customer_id, sale_type, chicken_type, price_per_piece, 
-                number_of_pieces, total_price, date) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)`;
+                number_of_pieces, discount, total_price, date) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
     values = [
       customer_id,
       sale_type,
       chicken_type,
       price_per_piece,
       number_of_pieces,
+      discount,
       total_price,
       date,
     ];
   } else {
     query = `INSERT INTO sales 
-                (customer_id, sale_type, quantity_sold, price_per_unit, 
+                (customer_id, sale_type, quantity_sold, price_per_unit, discount, 
                 total_price, date) 
-                VALUES (?, ?, ?, ?, ?, ?)`;
+                VALUES (?, ?, ?, ?, ?, ?, ?)`;
     values = [
       customer_id,
       "eggs",
       quantity_sold,
       price_per_unit,
+      discount,
       total_price,
       date,
     ];
@@ -76,15 +79,31 @@ router.get("/", (request, response) => {
 
 router.put("/:id", (request, response) => {
   const { id } = request.params;
-  const { saleDate, customerId, saleType, quantity, pricePerUnit, totalPrice } =
-    request.body;
+  const {
+    saleDate,
+    customerId,
+    saleType,
+    quantity,
+    pricePerUnit,
+    discount,
+    totalPrice,
+  } = request.body;
 
   const query =
-    "UPDATE sales SET date = ?, customer_id = ?, sale_type = ?, quantity_sold = ?, price_per_unit = ?, total_price = ? WHERE id = ?";
+    "UPDATE sales SET date = ?, customer_id = ?, sale_type = ?, quantity_sold = ?, price_per_unit = ?, discount = ?, total_price = ? WHERE id = ?";
 
   connection.query(
     query,
-    [saleDate, customerId, saleType, quantity, pricePerUnit, totalPrice, id],
+    [
+      saleDate,
+      customerId,
+      saleType,
+      quantity,
+      pricePerUnit,
+      discount,
+      totalPrice,
+      id,
+    ],
     (err, result) => {
       if (err) {
         return response.status(500).json({ error: err.message });

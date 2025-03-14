@@ -44,6 +44,7 @@ const Sales = () => {
             <th>Type</th>
             <th>Quantity</th>
             <th>Price per unit</th>
+            <th>Discount</th>
             <th>Total price</th>
             <th>Actions</th>
           </tr>
@@ -57,6 +58,7 @@ const Sales = () => {
               <td>{sale.sale_type}</td>
               <td>{sale.number_of_pieces || sale.quantity_sold}</td>
               <td>{sale.price_per_piece || sale.price_per_unit}</td>
+              <td>{sale.discount}</td>
               <td>{sale.total_price}</td>
               <td>
                 <button onClick={() => Delete(sale.id)}>Del</button>

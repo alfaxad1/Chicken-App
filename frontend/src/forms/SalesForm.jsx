@@ -13,25 +13,10 @@ const SalesForm = ({ fetchSales }) => {
     number_of_pieces: 0,
     quantity_sold: 0,
     price_per_unit: 0,
+    discount: 0,
     //total_price: 0,
     date: "",
   });
-
-  const calculate = (val1, val2) => {
-    return parseFloat(val1) * parseFloat(val2);
-  };
-
-  useEffect(() => {
-    saleType === "chicken"
-      ? setTotal(calculate(sale.price_per_piece, sale.number_of_pieces))
-      : setTotal(calculate(sale.quantity_sold, sale.price_per_unit));
-  }, [
-    sale.price_per_piece,
-    sale.number_of_pieces,
-    sale.quantity_sold,
-    sale.price_per_unit,
-    saleType,
-  ]);
 
   const handleSaleTypeChange = (e) => {
     setSaleType(e.target.value);
@@ -44,6 +29,27 @@ const SalesForm = ({ fetchSales }) => {
     setSale({ ...sale, [e.target.name]: e.target.value });
   };
 
+  const calculate = (val1, val2, dis) => {
+    return parseFloat(val1) * parseFloat(val2) - parseFloat(dis);
+  };
+
+  useEffect(() => {
+    saleType === "chicken"
+      ? setTotal(
+          calculate(sale.price_per_piece, sale.number_of_pieces, sale.discount)
+        )
+      : setTotal(
+          calculate(sale.quantity_sold, sale.price_per_unit, sale.discount)
+        );
+  }, [
+    sale.price_per_piece,
+    sale.number_of_pieces,
+    sale.quantity_sold,
+    sale.price_per_unit,
+    sale.discount,
+    saleType,
+  ]);
+
   const Save = async (e) => {
     e.preventDefault();
     try {
@@ -55,9 +61,25 @@ const SalesForm = ({ fetchSales }) => {
       console.log(response.data.message);
       //window.location.reload();
       fetchSales();
+      resetForm();
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const resetForm = () => {
+    setSale({
+      customer_id: "",
+      saleType: "",
+      chicken_type: "",
+      price_per_piece: 0,
+      number_of_pieces: 0,
+      quantity_sold: 0,
+      price_per_unit: 0,
+      discount: 0,
+      total_price: 0,
+      date: "",
+    });
   };
 
   return (
@@ -120,6 +142,17 @@ const SalesForm = ({ fetchSales }) => {
                 />
               </div>
               <div>
+                <label htmlFor="discount">Discount:</label>
+                <input
+                  type="number"
+                  id="discount"
+                  name="discount"
+                  value={sale.discount}
+                  onChange={(e) => handleChange(e)}
+                  placeholder="Enter the discount given"
+                />
+              </div>
+              <div>
                 <label htmlFor="total-price-chicken">Total:</label>
                 <input
                   type="number"
@@ -128,7 +161,7 @@ const SalesForm = ({ fetchSales }) => {
                   value={total}
                   onChange={(e) => handleChange(e)}
                   placeholder="Total"
-                  //readOnly
+                  readOnly
                 />
               </div>
               <div>
@@ -180,6 +213,17 @@ const SalesForm = ({ fetchSales }) => {
                 />
               </div>
               <div>
+                <label htmlFor="discount">Discount:</label>
+                <input
+                  type="number"
+                  id="discount"
+                  name="discount"
+                  value={sale.discount}
+                  onChange={(e) => handleChange(e)}
+                  placeholder="Enter the discount given"
+                />
+              </div>
+              <div>
                 <label htmlFor="total-price-eggs">Total:</label>
                 <input
                   type="number"
@@ -188,7 +232,7 @@ const SalesForm = ({ fetchSales }) => {
                   value={total}
                   onChange={(e) => handleChange(e)}
                   placeholder="Total"
-                  //readOnly
+                  readOnly
                 />
               </div>
               <div>

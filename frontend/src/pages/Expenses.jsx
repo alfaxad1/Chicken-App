@@ -6,7 +6,11 @@ const Expenses = () => {
   let num = 1;
   const [expensesData, setExpensesData] = useState([]);
 
-  //const [show, setShow] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const create = () => {
+    setShow(!show);
+  };
 
   useEffect(() => {
     fetchExpenses();
@@ -36,7 +40,10 @@ const Expenses = () => {
 
   return (
     <>
-      <ExpensesForm fetchExpenses={fetchExpenses} />
+      <button onClick={() => create()}>create</button>
+      <div style={{ display: show ? "block" : "none" }}>
+        <ExpensesForm fetchExpenses={fetchExpenses} />
+      </div>
 
       <table>
         <thead>
