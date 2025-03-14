@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import PurchaseForm from "../forms/PurchaseForm";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 
 const Purchases = () => {
   let num = 1;
@@ -32,12 +33,15 @@ const Purchases = () => {
       );
       console.log(response);
       fetchPurchases();
+      toast.success(response.data.message);
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <>
+      <ToastContainer />
+
       <button onClick={() => create()}>create</button>
       <div style={{ display: show ? "block" : "none" }}>
         <PurchaseForm fetchPurchases={fetchPurchases} />

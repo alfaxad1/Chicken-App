@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SalesForm from "../forms/SalesForm";
+import { toast, ToastContainer } from "react-toastify";
 
 const Sales = () => {
   let num = 1;
@@ -32,6 +33,7 @@ const Sales = () => {
       );
       console.log(response.data.message);
       fetchSales();
+      toast.success(response.data.message);
     } catch (error) {
       console.error(error);
     }
@@ -39,6 +41,8 @@ const Sales = () => {
 
   return (
     <>
+      <ToastContainer />
+
       <button onClick={() => create()}>create</button>
       <div style={{ display: show ? "block" : "none" }}>
         <SalesForm fetchSales={fetchSales} />

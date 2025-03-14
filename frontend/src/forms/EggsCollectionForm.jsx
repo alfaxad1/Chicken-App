@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 const EggsCollectionForm = ({ fetchEggsCollection }) => {
   const [collection, setCollection] = useState({
@@ -21,9 +22,10 @@ const EggsCollectionForm = ({ fetchEggsCollection }) => {
       );
       //console.log(collection);
       console.log(response.data.message);
-      window.location.reload();
+      //window.location.reload();
       resetForm();
       fetchEggsCollection();
+      toast.success(response.data.message);
     } catch (error) {
       console.error(error);
     }
@@ -39,6 +41,7 @@ const EggsCollectionForm = ({ fetchEggsCollection }) => {
 
   return (
     <>
+      <ToastContainer />
       <form id="egg-collection-form">
         <div>
           <label>Date:</label>

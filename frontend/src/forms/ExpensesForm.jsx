@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 const ExpensesForm = ({ fetchExpenses }) => {
   const [expense, setExpense] = useState({
@@ -22,7 +23,8 @@ const ExpensesForm = ({ fetchExpenses }) => {
       console.log(response.data.message);
       resetForm();
       fetchExpenses();
-      window.location.reload();
+      //window.location.reload();
+      toast.success(response.data.message);
     } catch (error) {
       console.error(error);
     }
@@ -38,6 +40,7 @@ const ExpensesForm = ({ fetchExpenses }) => {
 
   return (
     <>
+      <ToastContainer />
       <form id="expenses-form">
         <div id="expenses-fields">
           <div>

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 const SalesForm = ({ fetchSales }) => {
   const [saleType, setSaleType] = useState([]);
@@ -62,6 +63,7 @@ const SalesForm = ({ fetchSales }) => {
       window.location.reload();
       fetchSales();
       resetForm();
+      toast.success(response.data.message);
     } catch (error) {
       console.error(error);
     }
@@ -84,6 +86,7 @@ const SalesForm = ({ fetchSales }) => {
 
   return (
     <>
+      <ToastContainer />
       <form id="sales-form">
         <div id="sale-fields">
           <label>Sale Type:</label>

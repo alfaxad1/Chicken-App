@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ExpensesForm from "../forms/ExpensesForm";
+import { toast, ToastContainer } from "react-toastify";
 
 const Expenses = () => {
   let num = 1;
@@ -26,6 +27,16 @@ const Expenses = () => {
     }
   };
 
+  const toastProperties = {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+  };
+
   const Delete = async (id) => {
     try {
       const response = await axios.delete(
@@ -33,6 +44,7 @@ const Expenses = () => {
       );
       console.log(response.data.message);
       fetchExpenses();
+      toast.success(response.data.message, toastProperties);
     } catch (error) {
       console.error(error);
     }
@@ -40,6 +52,8 @@ const Expenses = () => {
 
   return (
     <>
+      <ToastContainer />
+
       <button onClick={() => create()}>create</button>
       <div style={{ display: show ? "block" : "none" }}>
         <ExpensesForm fetchExpenses={fetchExpenses} />

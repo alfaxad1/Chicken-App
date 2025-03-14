@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import EggsCollectionForm from "../forms/EggsCollectionForm";
+import { toast, ToastContainer } from "react-toastify";
 
 const EggsCollection = () => {
   let num = 1;
@@ -34,12 +35,15 @@ const EggsCollection = () => {
       );
       console.log(response.data.message);
       fetchEggsCollection();
+      toast.success(response.data.message);
     } catch (error) {
       console.error(error);
     }
   };
   return (
     <>
+      <ToastContainer />
+
       <button onClick={() => create()}>create</button>
       <div style={{ display: show ? "block" : "none" }}>
         <EggsCollectionForm fetchEggsCollection={fetchEggsCollection} />

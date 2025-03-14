@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 const ChickenLossForm = ({ fetchChickenLoss }) => {
   const [chickenLoss, setChickenLoss] = useState({
@@ -23,8 +24,9 @@ const ChickenLossForm = ({ fetchChickenLoss }) => {
       console.log(chickenLoss);
       console.log(response.data.message);
       fetchChickenLoss();
-      window.location.reload();
+      //window.location.reload();
       resetForm();
+      toast.success(response.data.message);
     } catch (error) {
       console.error(error);
     }
@@ -41,6 +43,7 @@ const ChickenLossForm = ({ fetchChickenLoss }) => {
 
   return (
     <>
+      <ToastContainer />
       <form id="chickenLoss-form">
         <div>
           <label htmlFor="chicken-type">Chicken Type</label>
