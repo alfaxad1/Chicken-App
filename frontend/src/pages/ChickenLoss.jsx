@@ -29,15 +29,18 @@ const ChickenLoss = () => {
   };
 
   const Delete = async (id) => {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3000/api/chicken-loss/${id}`
-      );
-      console.log(response.data.message);
-      fetchChickenLoss();
-      toast.success(response.data.message);
-    } catch (error) {
-      console.error(error);
+    const confirmed = confirm("Do you want to delete this sale?");
+    if (confirmed) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:3000/api/chicken-loss/${id}`
+        );
+        console.log(response.data.message);
+        fetchChickenLoss();
+        toast.success(response.data.message);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
   return (

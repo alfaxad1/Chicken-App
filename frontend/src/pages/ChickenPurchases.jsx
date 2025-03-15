@@ -30,14 +30,17 @@ const ChickenPurchases = () => {
   };
 
   const Delete = async (id) => {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3000/api/chicken-purchases/${id}`
-      );
-      console.log(response.data.message);
-      fetchChickenPurchases();
-    } catch (error) {
-      console.error(error);
+    const confirmed = confirm("Do you want to delete this purchase?");
+    if (confirmed) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:3000/api/chicken-purchases/${id}`
+        );
+        console.log(response.data.message);
+        fetchChickenPurchases();
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 

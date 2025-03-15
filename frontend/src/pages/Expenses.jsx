@@ -38,15 +38,18 @@ const Expenses = () => {
   };
 
   const Delete = async (id) => {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3000/api/expenses/${id}`
-      );
-      console.log(response.data.message);
-      fetchExpenses();
-      toast.success(response.data.message, toastProperties);
-    } catch (error) {
-      console.error(error);
+    const confirmed = confirm("Do you want to delete this expense?");
+    if (confirmed) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:3000/api/expenses/${id}`
+        );
+        console.log(response.data.message);
+        fetchExpenses();
+        toast.success(response.data.message, toastProperties);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 

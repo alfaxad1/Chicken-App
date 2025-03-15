@@ -29,15 +29,18 @@ const EggsCollection = () => {
   };
 
   const Delete = async (id) => {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3000/api/egg-collection/${id}`
-      );
-      console.log(response.data.message);
-      fetchEggsCollection();
-      toast.success(response.data.message);
-    } catch (error) {
-      console.error(error);
+    const confirmed = confirm("Do you want to delete this collection?");
+    if (confirmed) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:3000/api/egg-collection/${id}`
+        );
+        console.log(response.data.message);
+        fetchEggsCollection();
+        toast.success(response.data.message);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
   return (

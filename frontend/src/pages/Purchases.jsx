@@ -27,15 +27,18 @@ const Purchases = () => {
     }
   };
   const Delete = async (id) => {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3000/api/purchases/${id}`
-      );
-      console.log(response);
-      fetchPurchases();
-      toast.success(response.data.message);
-    } catch (error) {
-      console.log(error);
+    const confirmed = confirm("Do you want to delete this purchase?");
+    if (confirmed) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:3000/api/purchases/${id}`
+        );
+        console.log(response);
+        fetchPurchases();
+        toast.success(response.data.message);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   return (
