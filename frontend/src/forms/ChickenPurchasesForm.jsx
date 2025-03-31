@@ -69,6 +69,7 @@ const ChickenPurchasesForm = ({ fetchChickenPurchases }) => {
   return (
     <>
       <ToastContainer />
+
       <form id="chickenPurchases-form">
         <div id="chickenPurchases-fields">
           <div>

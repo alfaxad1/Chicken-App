@@ -1,5 +1,6 @@
-const express = require("express");
-const connection = require("../config/dbConnection");
+import express from "express";
+import connection from "../config/dbConnection.js";
+
 const router = express.Router();
 router.use(express.json());
 
@@ -132,4 +133,4 @@ router.delete("/:id", (request, response) => {
   });
 });
 
-module.exports = router;
+export default router;

@@ -1,13 +1,15 @@
-const express = require("express");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+import express from "express";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+//import authenticateToken from "../middlewares/auth.js";
+import validate from "../models/registerModel.js";
+import connection from "../config/dbConnection.js";
+import dotenv from "dotenv";
 
-const authenticateToken = require("../middlewares/auth");
-const validate = require("../models/registerModel");
-const connection = require("../config/dbConnection");
+dotenv.config();
+
 const router = express.Router();
 router.use(express.json());
-require("dotenv").config();
 
 const salt = 10;
 
@@ -73,4 +75,4 @@ router.post("/login", (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;

@@ -38,6 +38,7 @@ const ChickenPurchases = () => {
         );
         console.log(response.data.message);
         fetchChickenPurchases();
+        toast.success(response.data.message);
       } catch (error) {
         console.error(error);
       }

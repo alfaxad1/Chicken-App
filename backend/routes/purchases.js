@@ -1,6 +1,7 @@
-const express = require("express");
-const connection = require("../config/dbConnection");
-const { authenticateToken } = require("../middlewares/auth");
+import express from "express";
+import connection from "../config/dbConnection.js";
+//import authenticateToken from "../middlewares/auth.js";
+
 const router = express.Router();
 router.use(express.json());
 
@@ -68,4 +69,4 @@ router.delete("/:id", (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;
