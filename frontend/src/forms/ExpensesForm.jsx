@@ -44,8 +44,11 @@ const ExpensesForm = ({ fetchExpenses }) => {
       <form id="expenses-form">
         <div id="expenses-fields">
           <div>
-            <label htmlFor="expense-type">Type of Expense:</label>
+            <label className="block text-sm font-medium">
+              Type of Expense:
+            </label>
             <input
+              className="w-auto border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
               type="text"
               name="type"
               onChange={(e) => handleChange(e)}
@@ -55,8 +58,9 @@ const ExpensesForm = ({ fetchExpenses }) => {
             />
           </div>
           <div>
-            <label htmlFor="expense-cost">Cost:</label>
+            <label className="block">Cost:</label>
             <input
+              className="w-auto border-gray-300 rounded-lg shadow-sm"
               type="number"
               name="cost"
               onChange={(e) => handleChange(e)}
@@ -66,8 +70,9 @@ const ExpensesForm = ({ fetchExpenses }) => {
             />
           </div>
           <div>
-            <label htmlFor="expense-date">Date:</label>
+            <label className="block">Date:</label>
             <input
+              className="w-auto border-gray-300 rounded-lg shadow-sm"
               type="date"
               name="date"
               onChange={(e) => handleChange(e)}
