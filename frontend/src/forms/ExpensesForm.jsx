@@ -41,12 +41,10 @@ const ExpensesForm = ({ fetchExpenses }) => {
   return (
     <>
       <ToastContainer />
-      <form id="expenses-form">
+      <form id="expenses-form" className="">
         <div id="expenses-fields">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Type of Expense:
-            </label>
+          <div className="">
+            <label className="">Type of Expense:</label>
             <input
               className=""
               type="text"
@@ -58,7 +56,7 @@ const ExpensesForm = ({ fetchExpenses }) => {
             />
           </div>
           <div>
-            <label className="block">Cost:</label>
+            <label className="">Cost:</label>
             <input
               className=""
               type="number"
@@ -70,7 +68,7 @@ const ExpensesForm = ({ fetchExpenses }) => {
             />
           </div>
           <div>
-            <label className="block">Date:</label>
+            <label className="">Date:</label>
             <input
               className=""
               type="date"
@@ -80,10 +78,14 @@ const ExpensesForm = ({ fetchExpenses }) => {
               required
             />
           </div>
-          <button onClick={(e) => Save(e)} name="submit" type="submit">
+          <button
+            className="bg-blue-500 rounded-lg m-4 px-3 py-1 text-gray-700 "
+            onClick={(e) => Save(e)}
+            name="submit"
+            type="submit"
+          >
             Save
           </button>
-          {/* <button>Close</button> */}
         </div>
       </form>
     </>

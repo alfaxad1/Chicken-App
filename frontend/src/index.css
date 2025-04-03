@@ -18,7 +18,13 @@
   [multiple],
   textarea,
   select {
-    @apply w-auto border-gray-300 rounded-lg shadow-sm focus:border-indigo-500
+    @apply w-full border-gray-300 rounded-lg shadow-sm focus:border-indigo-500
     focus:ring-indigo-500;
+  }
+  label {
+    @apply block text-sm font-medium text-gray-700;
+  }
+  form {
+    @apply bg-gray-300 p-4 border-gray-500 rounded-lg shadow-black w-80 h-auto m-auto;
   }
 }

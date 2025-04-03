@@ -144,6 +144,7 @@ const PurchaseForm = ({ fetchPurchases }) => {
           <button
             type="submit"
             name="submit"
+            className=""
             onClick={(e) => {
               Save(e);
             }}

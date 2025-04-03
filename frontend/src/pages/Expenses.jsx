@@ -56,7 +56,6 @@ const Expenses = () => {
   return (
     <>
       <ToastContainer />
-
       <button onClick={() => create()}>create</button>
       <div style={{ display: show ? "block" : "none" }}>
         <ExpensesForm fetchExpenses={fetchExpenses} />
