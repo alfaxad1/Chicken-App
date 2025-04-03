@@ -6,6 +6,7 @@ import ChickenPurchases from "./pages/ChickenPurchases";
 import ChickenLoss from "./pages/ChickenLoss";
 import EggsCollection from "./pages/EggsCollection";
 import Sales from "./pages/Sales";
+import Login from "./Auth/Login";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/chicken-loss" element={<ChickenLoss />}></Route>
         <Route path="/eggs-collection" element={<EggsCollection />}></Route>
         <Route path="/sales" element={<Sales />}></Route>
+        <Route path="/login" element={<Login />}></Route>
       </Routes>
     </Router>
   );
