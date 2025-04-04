@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ChickenPurchasesForm from "../forms/ChickenPurchasesForm";
 import { toast, ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const ChickenPurchases = () => {
   let num = 1;

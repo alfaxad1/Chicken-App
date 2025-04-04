@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PurchaseForm from "../forms/PurchaseForm";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const Purchases = () => {
   let num = 1;

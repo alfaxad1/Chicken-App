@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import EggsCollectionForm from "../forms/EggsCollectionForm";
 import { toast, ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const EggsCollection = () => {
   let num = 1;

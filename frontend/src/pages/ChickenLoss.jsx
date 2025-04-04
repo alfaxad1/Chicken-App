@@ -47,6 +47,9 @@ const ChickenLoss = () => {
     <>
       <ToastContainer />
 
+      <button>
+        <Link to={`/`}></Link>
+      </button>
       <button onClick={() => create()}>create</button>
       <div style={{ display: show ? "block" : "none" }}>
         <ChickenLossForm fetchChickenLoss={fetchChickenLoss} />
