@@ -10,7 +10,6 @@ const Register = () => {
   });
 
   const handleChange = (e) => {
-    e.preventDefault();
     setRegistrationData({
       ...registrationData,
       [e.target.name]: e.target.value,
@@ -18,14 +17,26 @@ const Register = () => {
   };
 
   const navigate = useNavigate();
-  const Register = async () => {
-    const response = await axios.post(
-      `http://localhost:3000/api/users/register`,
-      registrationData
-    );
-    if (response) {
-      console.log(response);
-      navigate(`/login`);
+  const registerUser = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/api/users/register`,
+        registrationData
+      );
+      if (response.data.Status === "Success") {
+        console.log(response.data.message);
+        navigate(`/login`);
+      }
+    } catch (error) {
+      if (error.response) {
+        const errormsg = error.response.data.error.message.replace(/"/g, "");
+        console.log(errormsg);
+        const errorMessage = document.getElementById("error-message");
+        errorMessage.innerText = errormsg;
+      } else {
+        console.error(error);
+      }
     }
   };
   return (
@@ -72,8 +83,7 @@ const Register = () => {
         </div>
         <div></div>
         <div id="error-message"></div>
-        <div id="validation-message"></div>
-        <button type="submit" onClick={(e) => Register(e)}>
+        <button type="submit" onClick={(e) => registerUser(e)}>
           Register
         </button>
       </form>

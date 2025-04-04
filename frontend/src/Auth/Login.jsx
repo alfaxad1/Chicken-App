@@ -25,8 +25,8 @@ const Login = () => {
         navigate("/purchases");
       } else {
         console.log(response.data.error);
-        const errorMessage = document.getElementById("error-message");
-        errorMessage.innerText = response.data.error;
+        const errormsg = document.getElementById("error-message");
+        errormsg.innerText = response.data.error;
       }
     } catch (error) {
       console.error(error);
