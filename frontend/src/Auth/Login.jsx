@@ -1,8 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-const navigate = useNavigate;
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [values, setValues] = useState({ password: "", username: "" });
@@ -10,17 +8,25 @@ const Login = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  const navigate = useNavigate();
   const Login = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:3000/api/users`);
-      console.log(response.data.message);
+      const response = await axios.post(
+        `http://localhost:3000/api/users/login`,
+        values
+      );
+      console.log(response);
+      const user = response.data.user;
+      console.log(user);
       const token = response.data.token;
       console.log(token);
       if (token) {
         navigate("/purchases");
       } else {
         console.log(response.data.error);
+        const errorMessage = document.getElementById("error-message");
+        errorMessage.innerText = response.data.error;
       }
     } catch (error) {
       console.error(error);
@@ -29,7 +35,7 @@ const Login = () => {
 
   return (
     <>
-      <form id="login-form">
+      <form id="login-form" className="m-4">
         <div>
           <input
             type="text"
@@ -48,8 +54,16 @@ const Login = () => {
             required
           />
         </div>
-        {/* <div></div> to register */}
-        <button type="submit" onClick={(e) => Login(e)}>
+        <div id="error-message" className="text-center text-red-600 py-2"></div>
+        <div className="hover:underline text-center py-2">
+          <Link to={`/register`}>Do not have an account? Register</Link>
+        </div>
+        <button
+          type="submit"
+          onClick={(e) => Login(e)}
+          className="bg-indigo-500 text-gray-700 rounded-lg bg-center  py-1 w-full 
+          hover:bg-indigo-400"
+        >
           Login
         </button>
       </form>
