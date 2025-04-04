@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [registrationData, setRegistrationData] = useState({
@@ -41,7 +41,7 @@ const Register = () => {
   };
   return (
     <div>
-      <form>
+      <form className="mt-10">
         <div>
           <h2>Register a new user</h2>
         </div>
@@ -81,9 +81,16 @@ const Register = () => {
             <option value="admin">Admin</option>
           </select>
         </div>
-        <div></div>
-        <div id="error-message"></div>
-        <button type="submit" onClick={(e) => registerUser(e)}>
+        <div className="hover:underline text-center py-2">
+          <Link to={`/login`}>Already have an account? Login</Link>
+        </div>
+        <div id="error-message" className="text-center text-red-600 py-2"></div>
+        <button
+          type="submit"
+          onClick={(e) => registerUser(e)}
+          className="bg-indigo-500 text-gray-700 rounded-lg bg-center  py-1 w-full 
+          hover:bg-indigo-400"
+        >
           Register
         </button>
       </form>

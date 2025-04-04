@@ -22,7 +22,7 @@ const Login = () => {
       const token = response.data.token;
       console.log(token);
       if (token) {
-        navigate("/purchases");
+        navigate("/");
       } else {
         console.log(response.data.error);
         const errormsg = document.getElementById("error-message");
@@ -34,8 +34,8 @@ const Login = () => {
   };
 
   return (
-    <>
-      <form id="login-form" className="m-4">
+    <div>
+      <form className="mt-10">
         <div>
           <input
             type="text"
@@ -67,7 +67,7 @@ const Login = () => {
           Login
         </button>
       </form>
-    </>
+    </div>
   );
 };
 

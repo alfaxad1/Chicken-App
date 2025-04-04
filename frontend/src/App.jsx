@@ -8,6 +8,7 @@ import EggsCollection from "./pages/EggsCollection";
 import Sales from "./pages/Sales";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
+import Dashboard from "./home/Dashboard";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/sales" element={<Sales />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/" element={<Dashboard />}></Route>
       </Routes>
     </Router>
   );
