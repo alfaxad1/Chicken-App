@@ -39,7 +39,7 @@ const Login = () => {
   return (
     <div>
       <form className="mt-10">
-        <div>
+        <div className="mt-3">
           <input
             type="text"
             name="username"
@@ -48,7 +48,7 @@ const Login = () => {
             required
           />
         </div>
-        <div>
+        <div className="mt-3">
           <input
             type={showPassword ? "text" : "password"}
             name="password"

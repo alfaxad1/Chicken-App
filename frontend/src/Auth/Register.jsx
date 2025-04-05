@@ -49,7 +49,7 @@ const Register = () => {
         <div>
           <h2>Register a new user</h2>
         </div>
-        <div>
+        <div className="mt-3">
           <input
             type="text"
             name="username"
@@ -60,7 +60,7 @@ const Register = () => {
             required
           />
         </div>
-        <div>
+        <div className="mt-3">
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Password"
@@ -77,7 +77,7 @@ const Register = () => {
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
-        <div>
+        <div className="mt-3">
           <select
             name="role"
             required
