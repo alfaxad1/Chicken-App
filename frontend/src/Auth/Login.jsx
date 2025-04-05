@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -33,6 +34,8 @@ const Login = () => {
     }
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div>
       <form className="mt-10">
@@ -47,12 +50,19 @@ const Login = () => {
         </div>
         <div>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Password"
             onChange={(e) => handleChange(e)}
             required
           />
+          <button
+            onClick={() => {
+              setShowPassword(!showPassword);
+            }}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
         </div>
         <div id="error-message" className="text-center text-red-600 py-2"></div>
         <div className="hover:underline text-center py-2">

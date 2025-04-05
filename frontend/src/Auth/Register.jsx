@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -39,6 +40,9 @@ const Register = () => {
       }
     }
   };
+
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div>
       <form className="mt-10">
@@ -58,14 +62,20 @@ const Register = () => {
         </div>
         <div>
           <input
-            type="password"
-            name="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Password"
             onChange={(e) => {
               handleChange(e);
             }}
             required
           />
+          <button
+            onClick={() => {
+              setShowPassword(!showPassword);
+            }}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
         </div>
         <div>
           <select
